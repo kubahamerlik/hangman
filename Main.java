@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.io.IOException;
+
 public class Main {
     public static void main(String[] args){
 
@@ -26,7 +26,6 @@ public class Main {
             System.out.println("ZACZYNAMY GRĘ W WISIELCA!!!");
         }
 
-        int solved = 0;
         int step = 0;
         Word s1 = new Word(haslo, dlugosc);
         Archive tab = new Archive(1);
