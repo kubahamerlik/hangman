@@ -8,6 +8,9 @@ public class Main {
         String haslo;
         int dlugosc;
 
+        System.out.println("\n\nJeśli chcesz losowe hasło - jako argument wywołania programu podaj jedną literę - E, M, H ");
+        System.out.println("Oznaczają one poziomy trudności: E - EASY, M - MEDIUM, H - HARD!\n");
+
         if(args.length < 1){
             System.out.println("Proszę wprowadzić słowo do gry w wisielca:) Jeśli chcesz wpisać zdanie - oddziel słowa spacją! :)");
             haslo = scanner.nextLine();
