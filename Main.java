@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.io.IOException;
 public class Main {
     public static void main(String[] args){
 
@@ -32,8 +32,9 @@ public class Main {
         Archive tab = new Archive(1);
         char znak;
 
+
         while(step < 10){
-            System.out.println("\r");
+
             //pobieranie litery z wejścia
             System.out.println("Wprowadź literę:)");
             s1.wyswietl();
@@ -46,7 +47,7 @@ public class Main {
                 tab.wyswietl();
                 System.out.println();
             } else {
-                System.out.println("Niestety, podanej przez ciebie litery nie ma w słowie:)");
+                System.out.println("Niestety, podanej przez ciebie litery nie ma w haśle:)");
                 wyswietl.wyswietl(step);
                 tab.wyswietl();
                 step++;
