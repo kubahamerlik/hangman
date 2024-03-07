@@ -1,27 +1,25 @@
 public class Archive {
 
     private char[] tablica;
-    private int n;
+    private int n = 0;
 
 
 
     public Archive(int size){
         tablica = new char[size];
-        n = 0;
     }
     public void zapisz(char x){
         if( n == tablica.length - 1)
-            doubleSize();
+            expand();
         tablica[n++] = x;
     }
 
-    private void doubleSize(){
+    private void expand(){
         //System.err.println("Powiększam 2x");
-        char [] nt = new char[2*tablica.length];
+        char [] nt = new char[tablica.length + 5];
 
-        for(int i = 0; i < n; i++){
-            nt[i] = tablica[i];
-        }
+        if (n >= 0) System.arraycopy(tablica, 0, nt, 0, n);
+
         tablica = nt;
     }
 
