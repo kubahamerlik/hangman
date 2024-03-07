@@ -1,32 +1,45 @@
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
         Wyswietl wyswietl = new Wyswietl();
         String haslo;
-        int dlugosc;
+        int dlugosc = 0;
 
         System.out.println("\n\nJeśli chcesz losowe hasło - jako argument wywołania programu podaj jedną literę - E, M, H ");
         System.out.println("Oznaczają one poziomy trudności: E - EASY, M - MEDIUM, H - HARD!\n");
 
-        if(args.length < 1){
+        if (args.length < 1){
             System.out.println("Proszę wprowadzić słowo do gry w wisielca:) Jeśli chcesz wpisać zdanie - oddziel słowa spacją! :)");
             haslo = scanner.nextLine();
             dlugosc = haslo.length();
             System.out.println("Zaczynamy grę: Słowo ma " + dlugosc + " znaków" );
         } else {
-            StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < args.length; i++){
-                sb.append(args[i]);
-                if(i != args.length - 1) {
-                    sb.append(" ");
+            if (args.length == 1 && (Objects.equals(args[0], "E") || Objects.equals(args[0], "M") || Objects.equals(args[0], "H"))){
+                RandomWord losowe = new RandomWord(args[0]);
+                try {
+                    haslo = losowe.randomword();
+                    dlugosc = haslo.length();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+
+            } else {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < args.length; i++) {
+                    sb.append(args[i]);
+                    if (i != args.length - 1) {
+                        sb.append(" ");
+                    }
+                }
+                haslo = sb.toString();
+                dlugosc = haslo.length();
+                System.out.println("ZACZYNAMY GRĘ W WISIELCA!!!");
             }
-            haslo = sb.toString();
-            dlugosc = haslo.length();
-            System.out.println("ZACZYNAMY GRĘ W WISIELCA!!!");
         }
 
         int step = 0;
