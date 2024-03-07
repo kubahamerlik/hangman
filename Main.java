@@ -5,23 +5,30 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Wyswietl wyswietl = new Wyswietl();
-        String slowo;
+        String haslo;
         int dlugosc;
 
         if(args.length < 1){
-            System.out.println("Proszę wprowadzić słowo do gry w wisielca:) Jeśli chcesz wpisać zdanie - oddziel słowa znakiem \"_\":)");
-            slowo = scanner.next();
-            dlugosc = slowo.length();
+            System.out.println("Proszę wprowadzić słowo do gry w wisielca:) Jeśli chcesz wpisać zdanie - oddziel słowa spacją! :)");
+            haslo = scanner.nextLine();
+            dlugosc = haslo.length();
             System.out.println("Zaczynamy grę: Słowo ma " + dlugosc + " znaków" );
         } else {
-            slowo = args[1];
-            dlugosc = slowo.length();
-            System.out.println("Zaczynamy grę: Słowo ma " + dlugosc + " znaków" );
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < args.length; i++){
+                sb.append(args[i]);
+                if(i != args.length - 1) {
+                    sb.append(" ");
+                }
+            }
+            haslo = sb.toString();
+            dlugosc = haslo.length();
+            System.out.println("ZACZYNAMY GRĘ W WISIELCA!!!");
         }
 
         int solved = 0;
         int step = 0;
-        Word s1 = new Word(slowo, dlugosc);
+        Word s1 = new Word(haslo, dlugosc);
         Archive tab = new Archive(1);
         char znak;
 
@@ -53,7 +60,7 @@ public class Main {
 
         if(step == 10){
             System.out.println("!!!!GAME OVER!!!!");
-            System.out.print("SŁOWO TO: " + slowo + "!!!!!");
+            System.out.print("HASŁO TO: " + haslo + "!!!!!");
         } else if (step == 999){
             System.out.println("BRAWO!!!!WYGRAŁEŚ/AŚ!!!!!!");
         }

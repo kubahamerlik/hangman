@@ -9,8 +9,13 @@ public class Word {
         wybrane = new char[d];
         dlugosc = d;
         for(int i = 0; i < d; i++){
-            slowo[i] = s.charAt(i);
-            wybrane[i] = '_';
+            if(s.charAt(i) != ' ') {
+                slowo[i] = s.charAt(i);
+                wybrane[i] = '_';
+            } else {
+                slowo[i] = ' ';
+                wybrane[i] = ' ';
+            }
         }
     }
     public boolean sprawdzam(char c){
