@@ -7,65 +7,52 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         Wyswietl wyswietl = new Wyswietl();
-        String haslo;
-        int dlugosc = 0;
 
-        System.out.println("\n\nJeśli chcesz losowe hasło - jako argument wywołania programu podaj jedną literę - E, M, H ");
-        System.out.println("Oznaczają one poziomy trudności: E - EASY, M - MEDIUM, H - HARD!\n");
+        System.out.println("WITAMY W GRZE HANGMAN!!! ");
+        System.out.println("\nWYBIERZ TRYB GRY: \n Singleplayer -> wpisz S   Multiplayer -> wpisz M\n");
+        char t = scanner.next().charAt(0);
 
-        if (args.length < 1){
-            System.out.println("Proszę wprowadzić słowo do gry w wisielca:) Jeśli chcesz wpisać zdanie - oddziel słowa spacją! :)");
-            haslo = scanner.nextLine();
-            dlugosc = haslo.length();
-            System.out.println("Zaczynamy grę: Słowo ma " + dlugosc + " znaków" );
+        GameType game = null;
+        if (Objects.equals(t, 'S') || Objects.equals(t, 'M')) {
+            GameType gameType = new GameType(t);
+            System.out.println("lol");
         } else {
-            if (args.length == 1 && (Objects.equals(args[0], "E") || Objects.equals(args[0], "M") || Objects.equals(args[0], "H"))){
-                RandomWord losowe = new RandomWord(args[0]);
-                try {
-                    haslo = losowe.randomword();
-                    dlugosc = haslo.length();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            } else {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < args.length; i++) {
-                    sb.append(args[i]);
-                    if (i != args.length - 1) {
-                        sb.append(" ");
-                    }
-                }
-                haslo = sb.toString();
-                dlugosc = haslo.length();
-                System.out.println("ZACZYNAMY GRĘ W WISIELCA!!!");
+            while (!Objects.equals(t, 'S') && !Objects.equals(t, 'M')) {
+                System.out.println("MUSISZ WYBRAĆ TRYB SINGLEPLAYER LUB MULTIPLAYER WCISKAJĄC ODPOWIEDNIO KLAWISZE\n S - SINGLEPLAYER, \n M - MULTIPLAYER");
+                t = scanner.next().charAt(0);
+                game = new GameType(t);
             }
         }
 
+
         int step = 0;
-        Word s1 = new Word(haslo, dlugosc);
+
+        assert game != null;
+        String word = game.solution;
+        Word s1 = new Word(word, word.length());
         Archive tab = new Archive(1);
         char znak;
 
+        //while(game.multiplayer )
 
-        while(step < 10){
+        while (step < 10) {
 
             //pobieranie litery z wejścia
             System.out.println("Wprowadź literę:)");
             s1.wyswietl();
-            System.out.println("                            LICZBA BŁĘDÓW:" + step);
+            System.out.println("LICZBA BŁĘDÓW:" + step);
 
             System.out.println();
             znak = scanner.next().charAt(0);
 
-            if(tab.sprawdzCzyByla(znak)){
+            if (tab.sprawdzCzyByla(znak)) {
                 System.out.println("JUŻ PODAŁEŚ TĄ LITERĘ, SPRÓBUJ JESZCZE RAZ");
                 znak = scanner.next().charAt(0);
             }
 
             tab.zapisz(znak);
 
-            if(s1.sprawdzam(znak)){
+            if (s1.sprawdzam(znak)) {
                 System.out.println("Brawo! udało ci się zgadnąć literę!");
                 tab.wyswietl();
                 System.out.println();
@@ -76,16 +63,16 @@ public class Main {
                 step++;
             }
 
-            if(s1.solved()){
+            if (s1.solved()) {
                 step = 999;
             }
 
         }
 
-        if(step == 10){
+        if (step == 10) {
             System.out.println("!!!!GAME OVER!!!!");
-            System.out.print("HASŁO TO: " + haslo + "!!!!!");
-        } else if (step == 999){
+            System.out.print("HASŁO TO: " + game.solution + "!!!!!");
+        } else if (step == 999) {
             System.out.println("BRAWO!!!!WYGRAŁEŚ/AŚ!!!!!!");
         }
 

@@ -5,29 +5,18 @@ import java.io.IOException;
 
 public class RandomWord {
 
-    private String diff;
-    public RandomWord(String difficulty) {
+    private char diff;
+    public RandomWord(char difficulty) {
         diff = difficulty;
     }
 
     public String randomword() throws IOException {
-        String word = null;
-
-        switch(diff){
-
-            case "E":
-                word = randomLineFromFile("easy");
-                break;
-
-            case "M":
-                word = randomLineFromFile("medium");
-                break;
-
-            case "H":
-                word = randomLineFromFile("hard");
-                break;
-
-        }
+        String word = switch (diff) {
+            case 'E' -> randomLineFromFile("easy");
+            case 'M' -> randomLineFromFile("medium");
+            case 'H' -> randomLineFromFile("hard");
+            default -> null;
+        };
 
         return word;
     }
