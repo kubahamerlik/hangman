@@ -9,13 +9,31 @@ public class Word {
         wybrane = new char[d];
         dlugosc = d;
         for(int i = 0; i < d; i++){
-            if(s.charAt(i) != ' ') {
-                slowo[i] = s.charAt(i);
-                wybrane[i] = '_';
-            } else {
-                slowo[i] = ' ';
-                wybrane[i] = ' ';
+            switch(s.charAt(i)){
+                case ' ':
+                    slowo[i] = ' ';
+                    wybrane[i] = ' ';
+                    break;
+                case ',':
+                    slowo[i] = ',';
+                    wybrane[i] = ',';
+                    break;
+                case '.':
+                    slowo[i] = '.';
+                    wybrane[i] = '.';
+                default:
+                    slowo[i] = s.charAt(i);
+                    wybrane[i] = '_';
+                    break;
             }
+
+//            if(s.charAt(i) != ' ' || ) {
+//                slowo[i] = s.charAt(i);
+//                wybrane[i] = '_';
+//            } else {
+//                slowo[i] = ' ';
+//                wybrane[i] = ' ';
+//            }
         }
     }
     public boolean sprawdzam(char c){
@@ -54,3 +72,4 @@ public class Word {
     }
 
 }
+

@@ -53,8 +53,16 @@ public class Main {
             //pobieranie litery z wejścia
             System.out.println("Wprowadź literę:)");
             s1.wyswietl();
+            System.out.println("                            LICZBA BŁĘDÓW:" + step);
+
             System.out.println();
             znak = scanner.next().charAt(0);
+
+            if(tab.sprawdzCzyByla(znak)){
+                System.out.println("JUŻ PODAŁEŚ TĄ LITERĘ, SPRÓBUJ JESZCZE RAZ");
+                znak = scanner.next().charAt(0);
+            }
+
             tab.zapisz(znak);
 
             if(s1.sprawdzam(znak)){

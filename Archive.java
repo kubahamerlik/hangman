@@ -32,4 +32,15 @@ public class Archive {
             i++;
         }
     }
+
+    public boolean sprawdzCzyByla(char x){
+        boolean byla = false;
+        for(int i = 0; i < tablica.length; i++){
+            if(x == tablica[i] || Character.toUpperCase(x) == tablica[i] || Character.toLowerCase(x) == tablica[i]){
+                byla = true;
+            }
+        }
+
+        return byla;
+    }
 }
