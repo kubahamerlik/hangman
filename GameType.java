@@ -2,8 +2,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class GameType {
-    public boolean multiplayer;
-    public boolean singleplayer;
+    public static boolean multiplayer;
+    public static boolean singleplayer;
     public static String solution;
     public GameType(char x) throws IOException {
 
@@ -19,10 +19,12 @@ public class GameType {
     }
     Scanner skaner = new Scanner(System.in);
     public void singleplayer() throws IOException {
+        Singleplayer singleplayer = new Singleplayer();
         System.out.println("WYBRANO TRYB SINGLEPLAYER!");
         System.out.println("WYBIERZ POZIOM TRUDNOŚCI LOSOWYCH SŁÓW!\nE - Łatwy\nM - Średni\n H - Ciężki");
         RandomWord losowe = new RandomWord(skaner.next().charAt(0));
         solution = losowe.randomword();
+        singleplayer.gameplay(solution);
     }
 
     public void multiplayer() throws IOException {

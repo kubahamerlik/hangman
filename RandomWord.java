@@ -2,22 +2,31 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Random;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class RandomWord {
-
+    private static boolean correct;
     private char diff;
+
+    Scanner skaner = new Scanner(System.in);
     public RandomWord(char difficulty) {
+
+        while((difficulty != 'E') && (difficulty != 'M') && (difficulty != 'H')){
+            System.out.println("WPROWADŹ POZIOM TRUDNOŚCI JESZCZE RAZ!");
+            difficulty = skaner.next().charAt(0);
+        }
+
         diff = difficulty;
     }
 
     public String randomword() throws IOException {
+
         String word = switch (diff) {
             case 'E' -> randomLineFromFile("easy");
             case 'M' -> randomLineFromFile("medium");
             case 'H' -> randomLineFromFile("hard");
             default -> null;
         };
-
         return word;
     }
 

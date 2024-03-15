@@ -24,57 +24,20 @@ public class Main {
             }
         }
 
+///////////////////////////////////////////////// W GAMETYPE MUSIMY PRZEJŚĆ DO SINGLEPLAYER/MULTIPLAYER - NIE TUTAJ
+        //// TUTAJ ZOSTAWIŁBYM JEDYNIE KOŃCOWE NAPISY TYPU GAME OVER CZY COŚ W WERSJI SINGLEPLAYER, A W WERSJI MULTIPLAYER WYŚWIETLIŁBYM KTO WYGRAŁ.
 
-        int step = 0;
+        //assert game != null;
 
-        assert game != null;
-        String word = game.solution;
-        Word s1 = new Word(word, word.length());
-        Archive tab = new Archive(1);
-        char znak;
 
-        //while(game.multiplayer )
 
-        while (step < 10) {
-
-            //pobieranie litery z wejścia
-            System.out.println("Wprowadź literę:)");
-            s1.wyswietl();
-            System.out.println("LICZBA BŁĘDÓW:" + step);
-
-            System.out.println();
-            znak = scanner.next().charAt(0);
-
-            if (tab.sprawdzCzyByla(znak)) {
-                System.out.println("JUŻ PODAŁEŚ TĄ LITERĘ, SPRÓBUJ JESZCZE RAZ");
-                znak = scanner.next().charAt(0);
-            }
-
-            tab.zapisz(znak);
-
-            if (s1.sprawdzam(znak)) {
-                System.out.println("Brawo! udało ci się zgadnąć literę!");
-                tab.wyswietl();
-                System.out.println();
-            } else {
-                System.out.println("Niestety, podanej przez ciebie litery nie ma w haśle:)");
-                wyswietl.wyswietl(step);
-                tab.wyswietl();
-                step++;
-            }
-
-            if (s1.solved()) {
-                step = 999;
-            }
-
-        }
-
-        if (step == 10) {
+        if (GameType.singleplayer && (Singleplayer.step == 10)) {
             System.out.println("!!!!GAME OVER!!!!");
-            System.out.print("HASŁO TO: " + game.solution + "!!!!!");
-        } else if (step == 999) {
+            System.out.print("HASŁO TO: " + GameType.solution + "!!!!!");
+        } else if (GameType.singleplayer && Singleplayer.win) {
             System.out.println("BRAWO!!!!WYGRAŁEŚ/AŚ!!!!!!");
         }
+
 
     }
 }
